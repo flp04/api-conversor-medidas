@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+  <div id="app">
+    <select v-model="grandezaSelecionada">
+      <option v-for="grandeza in grandezas" :value="grandeza.id">{{ grandeza.nome }}</option>
+    </select>
+    <input type="number" v-model="valorGrandeza">
+    <select v-model="unidadeOrigem">
+      <option v-for="unidade in unidades" v-show="unidade.grandeza_id == grandezaSelecionada" :value="unidade.simbolo">{{ unidade.nome }}</option>
+    </select>
+    <span>=</span>
+    <input type="number" :value="valorConvertido" disabled>
+    <select v-model="unidadeDestino">
+      <option v-for="unidade in unidades" v-show="unidade.grandeza_id == grandezaSelecionada" :value="unidade.simbolo">{{ unidade.nome }}</option>
+    </select>
+    <button @click="converter">Converter</button>
+  </div>
+  <script>
+    new Vue({
+      el: '#app',
+      data: {
+        grandezas: [],
+        grandezaSelecionada: '',
+        valorGrandeza: 0,
+        unidades: [],
+        unidadeOrigem: '',
+        unidadeDestino: '',
+        valorConvertido: null
+      },
+      methods: {
+        getGrandezas () {
+          fetch('http://127.0.0.1:8000/api/grandezas')
+          .then(response => response.json())
+          .then(data => {
+              this.grandezas = data
+          })
+        },
+        getUnidades () {
+          fetch('http://127.0.0.1:8000/api/unidades')
+          .then(response => response.json())
+          .then(data => {
+              this.unidades = data
+          })
+        },
+        converter () {
+          fetch(`http://127.0.0.1:8000/api/${this.valorGrandeza}/${this.unidadeOrigem}/${this.unidadeDestino}`)
+          .then(response => response.json())
+          .then(data => {
+              this.valorConvertido = data.valor_convertido
+          })
+        }
+      },
+      mounted() {
+          console.log('oi')
+          this.getGrandezas()
+          this.getUnidades()
+      },
+    })
+  </script>
+</body>
+</html>
