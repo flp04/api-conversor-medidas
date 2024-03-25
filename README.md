@@ -7,9 +7,26 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Conversor de Medidas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+API para conversão de unidades de medida de mesma grandeza.
+
+*Version:* 1.0.0
+
+**Grandezas e unidades disponíveis:**
+*Área*
+*Comprimento*
+*Massa*
+*Temperatura*
+*Tempo*
+*Volume*
+
+**Rotas**
+ */grandezas*: Retorna todas as grandezas disponíveis na API
+ */unidades*: Retorna todas as unidades de medida disponíveis na API
+ */{valorgrandeza}/{unidadeorigem}/{unidadedestino}*: Recebe um valor a ser convertido, uma unidade de origem, uma unidade de destino e retorna o valor convertido.
+
+<!-- Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
 - [Simple, fast routing engine](https://laravel.com/docs/routing).
 - [Powerful dependency injection container](https://laravel.com/docs/container).
@@ -61,4 +78,4 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT). -->
