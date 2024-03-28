@@ -13,14 +13,14 @@ class UnidadeMedidaController extends Controller
     }
 
     public static function converter($grandeza, $unidadeorigem, $unidadedestino) {
-        if (self::verificarGrandezas($unidadeorigem, $unidadedestino)) {
-            $convertido_valor_referencia = $grandeza / Unidade::where('simbolo', $unidadeorigem)->orWhere('nome', $unidadeorigem)->value('valor_referencia');
+        if (self::verificarGrandezas($unidadeorigem, $unidadedestino)) { // verifica se as funções são proporcionais e podem ser computadas
+            $valor_convertido_referencia = $grandeza / Unidade::where('simbolo', $unidadeorigem)->orWhere('nome', $unidadeorigem)->value('valor_referencia');
             return json_encode(
                 [
                     'grandeza' => Grandeza::find(Unidade::where('simbolo', $unidadedestino)->orWhere('nome', $unidadedestino)->value('grandeza_id'))->value('nome'),
                     'valor_origem' => $grandeza,
                     'unidade_origem' => Unidade::where('simbolo', $unidadeorigem)->orWhere('nome', $unidadeorigem)->value('nome'),
-                    'valor_convertido' => $convertido_valor_referencia * Unidade::where('simbolo', $unidadedestino)->orWhere('nome', $unidadedestino)->value('valor_referencia'),
+                    'valor_convertido' => $valor_convertido_referencia * Unidade::where('simbolo', $unidadedestino)->orWhere('nome', $unidadedestino)->value('valor_referencia'),
                     'unidade_destino' => Unidade::where('simbolo', $unidadedestino)->orWhere('nome', $unidadedestino)->value('nome'),
                 ]
             );
